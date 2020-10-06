@@ -43,14 +43,16 @@ Window {
         GridView {
             id: application_list
             x: Settings.get("margin_padding")
+            //y: statusbar.height + Settings.get("margin_padding")+ Settings.get("margin_padding")+ Settings.get("margin_padding")
             width: parent.width - Settings.get("margin_padding")
-            height: parent.height - statusbar.height - Settings.get("margin_padding")
+            height: parent.height - statusbar.height - Settings.get("margin_padding") - bottombar.height
             model: appPages[0].length
             cellWidth: (parent.width - Settings.get("margin_padding")) / Settings.get("applications_per_row")
             cellHeight: (parent.width - Settings.get("margin_padding")) / Settings.get("applications_per_row")
             focus: true
             anchors {
-                bottom: parent.bottom
+                top: statusbar.bottom
+                topMargin: Settings.get("margin_padding")
             }
             delegate: Item {
                 Column {
@@ -69,7 +71,6 @@ Window {
                             anchors {
                                 horizontalCenter: parent.horizontalCenter
                                 verticalCenter: parent.verticalCenter
-                                bottom: application_icon.top
                             }
                         }
                         Text {

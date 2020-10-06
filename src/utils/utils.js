@@ -21,7 +21,10 @@ function handle_battery_monitor(item, output) {
     set_bat_level_width(item, battery_handler.battery_level(), output)
     switch(battery_handler.battery_charge_status()) {
         case 'Charging':
-            output.color = "#4f19d178"
+            output.color = "#19d178"
+            break
+        case 'Full':
+            output.color = "#19d178"
             break
         case 'Discharging':
             output.color = "#ffffff"

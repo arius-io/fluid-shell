@@ -34,6 +34,9 @@ Rectangle {
                 onClicked: {
                     application_container.visible = false
                 }
+                onPressAndHold: {
+                    console.log("multi task")
+                }
             }
         }
     }
