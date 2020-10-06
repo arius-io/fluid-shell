@@ -16,6 +16,7 @@ Rectangle {
         top: parent.top
     }
     Text {
+        visible: (root.state_handler.state == "normal")
         id: clock
         color: "#ffffff"
         text: Qt.formatDateTime(new Date(), "HH:mm")
@@ -37,7 +38,7 @@ Rectangle {
     Rectangle {
             id: battery_container
             anchors {
-                right: clock.left
+                right: (root.state_handler.state == "normal") ? clock.left : parent.right
                 verticalCenter: parent.verticalCenter
                 rightMargin: Settings.get("statusbar_screen_offset")
             }

@@ -2,13 +2,16 @@ import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.LocalStorage 2.14
 import QtQuick.Layouts 1.14
+
 import "utils/settings.js" as Settings
 import "utils/utils.js" as Utils
 import "UI"
+
 Window {
     property var appPages: []
     //hardcoded value for margin_padding
     property int margin_padding: root.height / 150
+    property alias state_handler: state_handler
     Component.onCompleted: {
         Settings.getDatabase()
         //hacked up "OOTB" just for testing
@@ -27,9 +30,23 @@ Window {
     height: Settings.get("screen_height")
     visible: true
     title: qsTr("Fluid Shell")
+    LockScreen {
+        id: lockscreen
+        width: root.width
+        height: root.height
+        visible: (state_handler.state == "locked")
+    }
+
+    AOD {
+        id: aod
+        width: root.width
+        height: root.height
+        visible: (state_handler.state == "AOD")
+    }
     Image {
         width: root.width
         height: root.height
+        visible: (state_handler.state == "normal")
         source: Settings.get("wallpaper_path")
         Component.onCompleted: {
             Utils.application_list_refresh(application_list)
@@ -105,7 +122,7 @@ Window {
         }
         Item {
             id: state_handler
-            state: "locked"
+            state: "AOD"
             states: [
                 State {
                     name: "locked"
