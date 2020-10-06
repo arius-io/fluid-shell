@@ -2,13 +2,13 @@ import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.LocalStorage 2.14
 import QtQuick.Layouts 1.14
-
 import "utils/settings.js" as Settings
 import "utils/utils.js" as Utils
 import "UI"
-
 Window {
     property var appPages: []
+    //hardcoded value for margin_padding
+    property int margin_padding: root.height / 150
     Component.onCompleted: {
         Settings.getDatabase()
         //hacked up "OOTB" just for testing
@@ -19,7 +19,6 @@ Window {
             Settings.set("applications_per_row", 3)
             Settings.set("statusbar_screen_offset", 5)
             Settings.set("wallpaper_path", "file:///home/xyn/img1.jpg")
-            Settings.set("margin_padding", 5)
             Settings.set("default_colour", "357cf0")
         }
     }
@@ -35,32 +34,29 @@ Window {
         Component.onCompleted: {
             Utils.application_list_refresh(application_list)
         }
-
         StatusBar {
             id: statusbar
         }
-
         GridView {
             id: application_list
-            x: Settings.get("margin_padding")
-            //y: statusbar.height + Settings.get("margin_padding")+ Settings.get("margin_padding")+ Settings.get("margin_padding")
-            width: parent.width - Settings.get("margin_padding")
-            height: parent.height - statusbar.height - Settings.get("margin_padding") - bottombar.height
+            x: margin_padding
+            width: parent.width - margin_padding
+            height: parent.height - statusbar.height - margin_padding - bottombar.height
             model: appPages[0].length
-            cellWidth: (parent.width - Settings.get("margin_padding")) / Settings.get("applications_per_row")
-            cellHeight: (parent.width - Settings.get("margin_padding")) / Settings.get("applications_per_row")
+            cellWidth: (parent.width - margin_padding) / Settings.get("applications_per_row")
+            cellHeight: (parent.width - margin_padding) / Settings.get("applications_per_row")
             focus: true
             anchors {
                 top: statusbar.bottom
-                topMargin: Settings.get("margin_padding")
+                topMargin: margin_padding
             }
             delegate: Item {
                 Column {
                     id: app_rectangle
                     Rectangle {
                         color: "#6e" + Settings.get("default_colour")
-                        width: application_list.cellWidth - Settings.get("margin_padding")
-                        height: application_list.cellHeight - Settings.get("margin_padding")
+                        width: application_list.cellWidth - margin_padding
+                        height: application_list.cellHeight - margin_padding
                         anchors.horizontalCenter: parent.horizontalCenter
                         Image {
                             width: app_rectangle.height / 2.5
@@ -76,15 +72,14 @@ Window {
                         Text {
                             font.pixelSize: parent.height / 10
                             text: appPages[0][index][0]
-                            color:"#ffffff"
+                            color: "#ffffff"
                             anchors {
                                 bottom: parent.bottom
-                                bottomMargin: Settings.get("margin_padding")
-                                leftMargin: Settings.get("margin_padding")
+                                bottomMargin: margin_padding
+                                leftMargin: margin_padding
                                 left: parent.left
                             }
                         }
-
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
@@ -95,39 +90,36 @@ Window {
                 }
             }
         }
-
         BottomBar {
             id: bottombar
         }
-
         //battery handler timer
-                       //TODO better "battery path" handler
-                       Timer {
-                           repeat: true
-                           interval: 1000
-                           running: true
-                           onTriggered: {
-                               Utils.handle_battery_monitor(statusbar.battery_container, statusbar.battery_level)
-                           }
-                       }
-                       Item {
-                           id: state_handler
-                           state: "locked"
-                           states: [
-                               State {
-                                   name: "locked"
-                               },
-                               State {
-                                   name: "AOD"
-                               },
-                               State {
-                                   name: "normal"
-                               },
-                               State {
-                                   name: "multitasking"
-                               }
-                           ]
-                       }
-
+        //TODO better "battery path" handler
+        Timer {
+            repeat: true
+            interval: 1000
+            running: true
+            onTriggered: {
+                Utils.handle_battery_monitor(statusbar.battery_container, statusbar.battery_level)
+            }
+        }
+        Item {
+            id: state_handler
+            state: "locked"
+            states: [
+                State {
+                    name: "locked"
+                },
+                State {
+                    name: "AOD"
+                },
+                State {
+                    name: "normal"
+                },
+                State {
+                    name: "multitasking"
+                }
+            ]
+        }
     }
 }
