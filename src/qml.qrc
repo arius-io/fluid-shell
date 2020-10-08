@@ -8,5 +8,7 @@
         <file>UI/AOD.qml</file>
         <file>UI/LockScreen.qml</file>
         <file>UI/Screen.qml</file>
+        <file>Chromes/WaylandChrome.qml</file>
+        <file>Chromes/XWaylandChrome.qml</file>
     </qresource>
 </RCC>

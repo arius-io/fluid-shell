@@ -1,5 +1,7 @@
 import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.14
 import "../utils/settings.js" as Settings
 import "../utils/utils.js" as Utils
 import "../UI"
@@ -52,6 +54,37 @@ Rectangle {
         StatusBar {
             id: statusbar
         }
+        Page {
+            visible: (shellSurfaces.count > 0) ? true : false
+            id: application_container
+            width: parent.width
+            height: parent.height - statusbar.height - bottombar.height
+            y: statusbar.height
+            z: (application_container.visible == true) ? 200 : 0
+            StackLayout {
+                id: application_display
+                anchors.fill: parent
+                Repeater {
+                    id: application_repeater
+                    model: shellSurfaces
+                    delegate: Loader {
+                        source: (modelData.toString().match(/XWaylandShellSurface/)) ? "../Chromes/XWaylandChrome.qml" : "../Chromes/WaylandChrome.qml"
+                        Component.onCompleted: {
+                            application_display.currentIndex = application_display.count - 1
+                            application_container.visible = true
+                        }
+                        Component.onDestruction: {
+                            application_display.currentIndex--
+                            if(!shellSurfaces.count > 0) {
+                                application_container.visible = false
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
         GridView {
             id: application_list
             x: margin_padding
