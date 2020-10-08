@@ -30,7 +30,7 @@ function handle_battery_monitor(item, output) {
             output.color = "#ffffff"
             break
         case 'Unknown':
-            output.color = "#4f19d178"
+            output.color = "#19d178"
             break
     }
 }

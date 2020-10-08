@@ -8,7 +8,7 @@ Rectangle {
         Settings.getDatabase()
     }
     width: root.width
-    height: (root.width > root.height) ? root.width / 20 : root.height / 20
+    height: (root.width > root.height) ? root.width / 20 * Settings.get("scaling_factor") : root.height / 20 * Settings.get("scaling_factor")
     z: 50
     color: "#000000"
     anchors {

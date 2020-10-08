@@ -9,7 +9,7 @@ Rectangle {
         Settings.getDatabase()
     }
     width: root.width
-    height: (root.width > root.height) ? root.width / 30 : root.height / 30
+    height: (root.width > root.height) ? root.width / 30 * Settings.get("scaling_factor") : root.height / 30 * Settings.get("scaling_factor")
     z: 50
     color: "#000000"
     anchors {
@@ -43,7 +43,7 @@ Rectangle {
                 rightMargin: Settings.get("statusbar_screen_offset")
             }
             height: clock.height
-            width: (root.width > root.height) ? root.height / 55 : root.width / 55
+            width: (root.width > root.height) ? root.height / 55 * Settings.get("scaling_factor") : root.width / 55 * Settings.get("scaling_factor")
             color: "#4fffffff"
             Rectangle {
                 id: battery_level

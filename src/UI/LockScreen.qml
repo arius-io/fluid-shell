@@ -1,14 +1,17 @@
 import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
-
+import "../utils/utils.js" as Utils
 import "../utils/settings.js" as Settings
 
 
 Item {
-    StatusBar {}
+    StatusBar {
+        id: statusbar
+    }
     Image {
         Component.onCompleted: {
             Settings.getDatabase()
+            Utils.handle_battery_monitor(statusbar.battery_container, statusbar.battery_level)
         }
         id: lockscreen
         width: root.width
@@ -56,6 +59,13 @@ Item {
             duration: 200
         }
     }
-
+    Timer {
+        repeat: true
+        interval: 1000
+        running: true
+        onTriggered: {
+            Utils.handle_battery_monitor(statusbar.battery_container, statusbar.battery_level)
+        }
+    }
 }
 
