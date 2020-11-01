@@ -5,7 +5,6 @@
         <file>UI/BottomBar.qml</file>
         <file>UI/StatusBar.qml</file>
         <file>utils/utils.js</file>
-        <file>UI/AOD.qml</file>
         <file>UI/LockScreen.qml</file>
         <file>UI/Screen.qml</file>
         <file>Chromes/WaylandChrome.qml</file>

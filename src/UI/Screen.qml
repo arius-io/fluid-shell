@@ -37,17 +37,11 @@ Rectangle {
         height: root.height
         visible: (state_handler.state == "locked")
     }
-    AOD {
-        id: aod
-        width: root.width
-        height: root.height
-        visible: (state_handler.state == "AOD")
-    }
-    Image {
+    Rectangle {
         width: root.width
         height: root.height
         visible: (state_handler.state == "normal")
-        source: Settings.get("wallpaper_path")
+        color: "#000000"
         Component.onCompleted: {
             Utils.application_list_refresh(application_list)
         }
@@ -154,13 +148,10 @@ Rectangle {
         }
         Item {
             id: state_handler
-            state: "AOD"
+            state: "locked"
             states: [
                 State {
                     name: "locked"
-                },
-                State {
-                    name: "AOD"
                 },
                 State {
                     name: "normal"

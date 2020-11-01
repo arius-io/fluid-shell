@@ -30,21 +30,12 @@ WaylandCompositor {
         }
     }
 
-    XdgShellV6 {
-        onToplevelCreated: {
-            shellSurfaces.append({
-                shellSurface: xdgSurface
-            })
-            toplevel.sendMaximized(Qt.size(screen_width, screen_height))
-        }
-    }
     XdgShell {
         onToplevelCreated: {
             shellSurfaces.append({
                 shellSurface: xdgSurface
             })
-            console.log(toplevel.parentToplevel)
-            toplevel.sendMaximized(Qt.size(screen_width, screen_height))
+            toplevel.sendResizing(Qt.size(screen_width, screen_height))
         }
         onPopupCreated: {
             shellSurfaces.append({
@@ -53,7 +44,17 @@ WaylandCompositor {
             popup.sendConfigure(popup.parentXdgSurface.windowGeometry)
         }
     }
+/* add in ~/.config/gtk-3.0/gtk.css
 
+decoration {
+    border-width: 0px;
+    box-shadow: none;
+    margin: 0px;
+}
+
+I HATE GTK 3 DROP SHADOW BTW
+
+*/
     LXW.XWayland {
         id: xwayland
         enabled: true
