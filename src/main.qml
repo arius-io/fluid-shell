@@ -29,7 +29,7 @@ Item {
             window: Window {
                 Component.onCompleted: {
                     Settings.getDatabase()
-                    xwayland.startServer()
+                    //xwayland.startServer()
                 }
                 visible: true
                 title: qsTr("Fluid Shell - Phone Screen")
@@ -56,7 +56,7 @@ Item {
             }
         }
 
-        LXW.XWayland {
+        /*LXW.XWayland {
             id: xwayland
             enabled: true
             manager: LXW.XWaylandManager {
@@ -69,14 +69,14 @@ Item {
                     shellSurfaces.append({
                         shellSurface: shellSurface
                     })
-                    shellSurface.sendConfigure(Qt.size(screen_width, screen_height));
+                    shellSurface.sendResize(Qt.size(480, 800));
                 }
             }
             Component {
                 id: shellSurfaceComponent
                 LXW.XWaylandShellSurface {}
             }
-        }
+        }*/
         XdgDecorationManagerV1 {
             preferredMode: XdgToplevel.ServerSideDecoration
         }
