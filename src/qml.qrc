@@ -2,12 +2,15 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>utils/settings.js</file>
-        <file>UI/BottomBar.qml</file>
-        <file>UI/StatusBar.qml</file>
+        <file>UI/Mobile/BottomBar.qml</file>
+        <file>UI/Mobile/StatusBar.qml</file>
         <file>utils/utils.js</file>
-        <file>UI/LockScreen.qml</file>
-        <file>UI/Screen.qml</file>
+        <file>UI/Mobile/LockScreen.qml</file>
+        <file>UI/Mobile/Screen.qml</file>
         <file>Chromes/WaylandChrome.qml</file>
         <file>Chromes/XWaylandChrome.qml</file>
+        <file>UI/Desktop/Desktop_BottomBar.qml</file>
+        <file>UI/Desktop/Desktop_Screen.qml</file>
+        <file>Chromes/DesktopWaylandCompositorChrome.qml</file>
     </qresource>
 </RCC>

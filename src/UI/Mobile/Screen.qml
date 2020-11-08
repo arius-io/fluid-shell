@@ -2,9 +2,10 @@ import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.14
-import "../utils/settings.js" as Settings
-import "../utils/utils.js" as Utils
-import "../UI"
+import "../../utils/settings.js" as Settings
+import "../../utils/utils.js" as Utils
+import "../../UI"
+
 Rectangle {
     property
     var appPages: []
@@ -22,7 +23,7 @@ Rectangle {
             Settings.set("applications_per_row", 3)
             Settings.set("statusbar_screen_offset", 5)
             Settings.set("wallpaper_path", "file:///home/xyn/img1.jpg")
-            Settings.set("default_colour", "357cf0")
+            Settings.set("default_colour", "#357cf0")
             Settings.set("scaling_factor", 1)
         }
         Utils.handle_battery_monitor(statusbar.battery_container, statusbar.battery_level)
@@ -36,6 +37,24 @@ Rectangle {
         width: root.width
         height: root.height
         visible: (state_handler.state == "locked")
+    }
+    Rectangle {
+        width: root.width
+        height: root.height
+        visible: (state_handler.state == "convergence")
+        color: "#363535"
+        Text {
+            text: "Convergence mode running. Press anywhere or undock your device to exit."
+            color: "#6c6c6c"
+            font.pointSize: parent.height / 30
+            wrapMode: Text.WordWrap
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            anchors {
+               horizontalCenter: parent.horizontalCenter
+               verticalCenter: parent.verticalCenter
+            }
+        }
     }
     Rectangle {
         width: root.width
@@ -62,7 +81,7 @@ Rectangle {
                     id: application_repeater
                     model: shellSurfaces
                     delegate: Loader {
-                        source: (modelData.toString().match(/XWaylandShellSurface/)) ? "../Chromes/XWaylandChrome.qml" : "../Chromes/WaylandChrome.qml"
+                        source: (modelData.toString().match(/XWaylandShellSurface/)) ? "../../Chromes/XWaylandChrome.qml" : "../../Chromes/WaylandChrome.qml"
                         Component.onCompleted: {
                             application_display.currentIndex = application_display.count - 1
                             application_container.visible = true
@@ -77,6 +96,11 @@ Rectangle {
                 }
             }
 
+        }
+        SwipeView {
+            id: screen_swipe_view
+            currentIndex: 0
+            anchors.fill: parent
         }
 
         GridView {
@@ -96,7 +120,7 @@ Rectangle {
                 Column {
                     id: app_rectangle
                     Rectangle {
-                        color: "#6e" + Settings.get("default_colour")
+                        color: Settings.get("default_colour")
                         width: application_list.cellWidth - margin_padding
                         height: application_list.cellHeight - margin_padding
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -158,6 +182,9 @@ Rectangle {
                 },
                 State {
                     name: "multitasking"
+                },
+                State {
+                    name: "convergence"
                 }
             ]
         }

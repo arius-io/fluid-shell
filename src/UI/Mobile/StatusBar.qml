@@ -1,6 +1,6 @@
 import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
-import "../utils/settings.js" as Settings
+import "../../utils/settings.js" as Settings
 
 Rectangle {
     property alias battery_container: battery_container
@@ -11,7 +11,7 @@ Rectangle {
     width: root.width
     height: (root.width > root.height) ? root.width / 30 * Settings.get("scaling_factor") : root.height / 30 * Settings.get("scaling_factor")
     z: 50
-    color: "#000000"
+    color: (root.state_handler.state == "locked") ? "#00000000" : "#000000"
     anchors {
         top: parent.top
     }
