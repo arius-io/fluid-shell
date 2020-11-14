@@ -46,7 +46,7 @@ Item {
             }
         }
         Timer {
-            repeat: (root.state_handler.state == "locked") ? true : false
+            repeat: (state_handler.state == "locked") ? true : false
             interval: 1000
             running: true
             onTriggered: {
@@ -64,7 +64,7 @@ Item {
                 if(lockscreen_overlay.y > -root.height / 2) {
                     bounce.restart()
                 } else {
-                    root.state_handler.state = "normal"
+                    state_handler.state = "normal"
                     lockscreen_overlay.y = 0
                 }
             }

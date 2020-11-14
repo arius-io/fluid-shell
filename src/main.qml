@@ -23,22 +23,51 @@ import "UI/Mobile"
 import "UI/Desktop"
 
 Item {
+    property alias root: screen_loader.item
+
+
     WaylandCompositor {
         id: wayland_compositor
         WaylandOutput {
             window: Window {
+                Item {
+                    id: state_handler
+                    state: (Settings.get("setup_done") == "true") ? "locked" : "setup"
+                    states: [
+                        State {
+                            name: "locked"
+                        },
+                        State {
+                            name: "normal"
+                        },
+                        State {
+                            name: "multitasking"
+                        },
+                        State {
+                            name: "convergence"
+                        },
+                        State {
+                            name: "setup"
+                        }
+
+                    ]
+                }
+
                 Component.onCompleted: {
                     Settings.getDatabase()
                     //xwayland.startServer()
                 }
                 visible: true
                 title: qsTr("Fluid Shell - Phone Screen")
-                width: Settings.get("screen_width")
-                height: Settings.get("screen_height")
+                //base screen resolution for the setup.
+                width: (Settings.get("setup_done") == "true") ? Settings.get("screen_width") : 480
+                height: (Settings.get("setup_done") == "true") ? Settings.get("screen_height") : 800
                 id: wayland_window
-                Screen {
-                    id: root
+                Loader {
+                    id: screen_loader
+                    source: (state_handler.state != "setup") ? "UI/Mobile/Screen.qml" : "UI/Mobile/Setup.qml"
                 }
+
             }
         }
         XdgShell {
@@ -46,7 +75,7 @@ Item {
                 shellSurfaces.append({
                     shellSurface: xdgSurface
                 })
-                toplevel.sendResizing(Qt.size(root.width, root.height - root.statusbar.height - root.bottombar.height))
+                toplevel.sendResizing(Qt.size(wayland_window.width, wayland_window.height - root.statusbar.height - root.bottombar.height))
             }
             onPopupCreated: {
                 shellSurfaces.append({

@@ -11,12 +11,12 @@ Rectangle {
     width: root.width
     height: (root.width > root.height) ? root.width / 30 * Settings.get("scaling_factor") : root.height / 30 * Settings.get("scaling_factor")
     z: 50
-    color: (root.state_handler.state == "locked") ? "#00000000" : "#000000"
+    color: (state_handler.state == "locked") ? "#00000000" : "#343232"
     anchors {
         top: parent.top
     }
     Text {
-        visible: (root.state_handler.state == "normal")
+        visible: (state_handler.state == "normal")
         id: clock
         color: "#ffffff"
         text: Qt.formatDateTime(new Date(), "HH:mm")
@@ -38,7 +38,7 @@ Rectangle {
     Rectangle {
             id: battery_container
             anchors {
-                right: (root.state_handler.state == "normal") ? clock.left : parent.right
+                right: (state_handler.state == "normal") ? clock.left : parent.right
                 verticalCenter: parent.verticalCenter
                 rightMargin: Settings.get("statusbar_screen_offset")
             }

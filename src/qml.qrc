@@ -12,5 +12,6 @@
         <file>UI/Desktop/Desktop_BottomBar.qml</file>
         <file>UI/Desktop/Desktop_Screen.qml</file>
         <file>Chromes/DesktopWaylandCompositorChrome.qml</file>
+        <file>UI/Mobile/Setup.qml</file>
     </qresource>
 </RCC>
