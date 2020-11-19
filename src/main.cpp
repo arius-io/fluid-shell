@@ -78,13 +78,18 @@ int main(int argc, char *argv[]) {
 
     QGuiApplication app(argc, argv);
 
+
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     engine.setOfflineStoragePath(QDir::homePath() + "/.fluid/");
     engine.addImageProvider("icons", new ImageProvider());
+    auto offlineStoragePath = QUrl::fromLocalFile(engine.offlineStoragePath());
+    engine.rootContext()->setContextProperty("offlineStoragePath", offlineStoragePath);
     engine.rootContext()->setContextProperty("apps", apps());
     engine.rootContext()->setContextProperty("proc", new Process(&engine));
     engine.rootContext()->setContextProperty("battery_handler", new battery_handler());
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

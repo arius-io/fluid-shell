@@ -27,26 +27,26 @@ Item {
             id: lockscreen_time
             text: Qt.formatDateTime(new Date(), "HH:mm")
             color: 'white'
-            font.pointSize: parent.height / 30
+            font.pointSize: (parent.height / 30) * Settings.get("scaling_factor")
             anchors {
                 left: parent.left
                 bottom: lockscreen_date.top
-                leftMargin: parent.height / 26
+                leftMargin: (parent.height / 26) * Settings.get("scaling_factor")
             }
         }
         Text {
             id: lockscreen_date
             text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
             color: 'white'
-            font.pointSize: parent.height / 50
+            font.pointSize: (parent.height / 50) * Settings.get("scaling_factor")
             anchors {
                 left: parent.left
                 bottom: parent.bottom
-                margins: parent.height / 26
+                margins: (parent.height / 26) * Settings.get("scaling_factor")
             }
         }
         Timer {
-            repeat: (state_handler.state == "locked") ? true : false
+            repeat: (state_handler.state === "locked") ? true : false
             interval: 1000
             running: true
             onTriggered: {

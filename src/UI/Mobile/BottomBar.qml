@@ -39,5 +39,23 @@ Rectangle {
                 }
             }
         }
+        Rectangle {
+            id: screenshot_button
+            height: parent.height / 2
+            width: parent.height / 2
+            color: "#e6ffffff"
+            anchors {
+                verticalCenter: parent.verticalCenter
+
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    root.grabToImage(function(result) {
+                        result.saveToFile("Screenshot "+ Qt.formatDateTime(new Date(), "dddd MMMM d") +" "+ Qt.formatTime(new Date(), "hh:mm:ss") +".png")
+                    })
+                }
+            }
+        }
     }
 }

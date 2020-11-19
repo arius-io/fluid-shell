@@ -24,12 +24,12 @@ Rectangle {
         id: lockscreen
         width: root.width
         height: root.height
-        visible: (state_handler.state == "locked")
+        visible: (state_handler.state === "locked")
     }
     Rectangle {
         width: root.width
         height: root.height
-        visible: (state_handler.state == "convergence")
+        visible: (state_handler.state === "convergence")
         color: "#363535"
         Text {
             text: "Convergence mode running. Press anywhere or undock your device to exit."
@@ -47,7 +47,7 @@ Rectangle {
     Rectangle {
         width: root.width
         height: root.height
-        visible: (state_handler.state == "normal")
+        visible: (state_handler.state === "normal")
         color: "#343232"
         Component.onCompleted: {
             Utils.application_list_refresh(application_list)
@@ -109,7 +109,7 @@ Rectangle {
                 Column {
                     id: app_rectangle
                     Rectangle {
-                        radius: 2
+                        radius: (this.height / 40) * Settings.get("scaling_factor")
                         color: Settings.get("default_colour")
                         width: application_list.cellWidth - margin_padding
                         height: application_list.cellHeight - margin_padding

@@ -16,7 +16,7 @@ import QtQuick.Window 2.14
 import QtQuick.LocalStorage 2.14
 import QtQuick.Layouts 1.14
 import QtWayland.Compositor 1.14
-import Liri.XWayland 1.0 as LXW
+/*import Liri.XWayland 1.0 as LXW*/
 import "utils/settings.js" as Settings
 import "utils/utils.js" as Utils
 import "UI/Mobile"
@@ -25,14 +25,13 @@ import "UI/Desktop"
 Item {
     property alias root: screen_loader.item
 
-
     WaylandCompositor {
         id: wayland_compositor
         WaylandOutput {
             window: Window {
                 Item {
                     id: state_handler
-                    state: (Settings.get("setup_done") == "true") ? "locked" : "setup"
+                    state: (Settings.get("setup_done") === "true") ? "locked" : "setup"
                     states: [
                         State {
                             name: "locked"
@@ -49,7 +48,6 @@ Item {
                         State {
                             name: "setup"
                         }
-
                     ]
                 }
 
@@ -60,14 +58,13 @@ Item {
                 visible: true
                 title: qsTr("Fluid Shell - Phone Screen")
                 //base screen resolution for the setup.
-                width: (Settings.get("setup_done") == "true") ? Settings.get("screen_width") : 480
-                height: (Settings.get("setup_done") == "true") ? Settings.get("screen_height") : 800
+                width: (Settings.get("setup_done") === "true") ? Settings.get("screen_width") : 480
+                height: (Settings.get("setup_done") === "true") ? Settings.get("screen_height") : 800
                 id: wayland_window
                 Loader {
                     id: screen_loader
                     source: (state_handler.state != "setup") ? "UI/Mobile/Screen.qml" : "UI/Mobile/Setup.qml"
                 }
-
             }
         }
         XdgShell {
