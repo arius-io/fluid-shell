@@ -16,6 +16,17 @@ Rectangle {
         top: parent.top
     }
     Text {
+        visible: true
+        color: "#ffffff"
+        text: root.width + "x" + root.height
+        font.pixelSize: parent.height / 2
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: Settings.get("statusbar_screen_offset")
+        }
+    }
+    Text {
         visible: (state_handler.state === "normal")
         id: clock
         color: "#ffffff"
