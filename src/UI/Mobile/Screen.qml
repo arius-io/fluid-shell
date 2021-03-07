@@ -44,11 +44,11 @@ Rectangle {
             }
         }
     }
-    Rectangle {
+    Image {
         width: root.width
         height: root.height
         visible: (state_handler.state === "normal")
-        color: "#343232"
+        source: Settings.get("wallpaper_path")
         Component.onCompleted: {
             Utils.application_list_refresh(application_list)
         }
@@ -109,8 +109,7 @@ Rectangle {
                 Column {
                     id: app_rectangle
                     Rectangle {
-                        radius: (this.height / 40) * Settings.get("scaling_factor")
-                        color: Settings.get("default_colour")
+                        color: "#00000000"
                         width: application_list.cellWidth - margin_padding
                         height: application_list.cellHeight - margin_padding
                         anchors.horizontalCenter: parent.horizontalCenter

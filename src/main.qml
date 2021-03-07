@@ -73,6 +73,7 @@ Item {
                     shellSurface: xdgSurface
                 })
                 toplevel.sendResizing(Qt.size(wayland_window.width, wayland_window.height - root.statusbar.height - root.bottombar.height))
+
             }
             onPopupCreated: {
                 shellSurfaces.append({

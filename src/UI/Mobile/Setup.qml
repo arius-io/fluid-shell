@@ -39,12 +39,11 @@ Rectangle {
             Settings.set("screen_height", 800)
             Settings.set("applications_per_row", 4)
             Settings.set("statusbar_screen_offset", 5)
-            Settings.set("wallpaper_path", offlineStoragePath + "Resources/Wallpapers/wallpaper_1.png")
+            Settings.set("wallpaper_path", offlineStoragePath + "Resources/Wallpapers/wallpaper_1.jpg")
             Settings.set("default_colour", "#8f8bd8")
             Settings.set("scaling_factor", 1)
             state_handler.state = "locked"
-            wayland_window.width = Settings.get("screen_width")
-            wayland_window.height = Settings.get("screen_height")
+
         }
     }
 
