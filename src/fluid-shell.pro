@@ -29,3 +29,5 @@ HEADERS += \
     battery_handler.h \
     image_provider.h \
     process.h
+
+QMAKE_POST_LINK += cp -rv ../src/Resources/ ~/.fluid/

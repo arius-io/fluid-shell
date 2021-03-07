@@ -37,9 +37,9 @@ Rectangle {
             Settings.set("setup_done", "true")
             Settings.set("screen_width", 480)
             Settings.set("screen_height", 800)
-            Settings.set("applications_per_row", 3)
+            Settings.set("applications_per_row", 4)
             Settings.set("statusbar_screen_offset", 5)
-            Settings.set("wallpaper_path", offlineStoragePath + "Wallpapers/wallpaper.png")
+            Settings.set("wallpaper_path", offlineStoragePath + "Resources/Wallpapers/wallpaper_1.png")
             Settings.set("default_colour", "#8f8bd8")
             Settings.set("scaling_factor", 1)
             state_handler.state = "locked"
