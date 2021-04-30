@@ -10,6 +10,7 @@ ShellSurfaceItem {
     shellSurface: modelData
     onSurfaceDestroyed: shellSurfaces.remove(index)
     visible: true
+    autoCreatePopupItems: true
 
 }
 

@@ -75,12 +75,6 @@ Item {
                 toplevel.sendResizing(Qt.size(wayland_window.width, wayland_window.height - root.statusbar.height - root.bottombar.height))
 
             }
-            onPopupCreated: {
-                shellSurfaces.append({
-                    shellSurface: xdgSurface
-                })
-                popup.sendConfigure(popup.parentXdgSurface.windowGeometry)
-            }
         }
 
         /*LXW.XWayland {
