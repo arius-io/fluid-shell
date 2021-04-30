@@ -1,6 +1,6 @@
 import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
-import "../../utils/settings.js" as Settings
+import "../utils/settings.js" as Settings
 
 Rectangle {
     id: bottombar

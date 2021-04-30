@@ -1,7 +1,7 @@
 import QtQuick 2.14
 import QtQuick.LocalStorage 2.14
-import "../../utils/utils.js" as Utils
-import "../../utils/settings.js" as Settings
+import "../utils/utils.js" as Utils
+import "../utils/settings.js" as Settings
 
 Item {
     StatusBar {

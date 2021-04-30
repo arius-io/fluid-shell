@@ -19,8 +19,7 @@ import QtWayland.Compositor 1.14
 /*import Liri.XWayland 1.0 as LXW*/
 import "utils/settings.js" as Settings
 import "utils/utils.js" as Utils
-import "UI/Mobile"
-import "UI/Desktop"
+import "UI"
 
 Item {
     property alias root: screen_loader.item
@@ -43,9 +42,6 @@ Item {
                             name: "multitasking"
                         },
                         State {
-                            name: "convergence"
-                        },
-                        State {
                             name: "setup"
                         }
                     ]
@@ -63,7 +59,7 @@ Item {
                 id: wayland_window
                 Loader {
                     id: screen_loader
-                    source: (state_handler.state != "setup") ? "UI/Mobile/Screen.qml" : "UI/Mobile/Setup.qml"
+                    source: (state_handler.state != "setup") ? "UI/Screen.qml" : "UI/Setup.qml"
                 }
             }
         }
@@ -105,7 +101,4 @@ Item {
             id: shellSurfaces
         }
     }
-    /*Loader {
-        source: (root.state_handler.state == "convergence") ? "Chromes/DesktopWaylandCompositorChrome.qml" : ""
-    }*/
 }
